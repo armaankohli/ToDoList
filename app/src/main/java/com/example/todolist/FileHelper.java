@@ -28,18 +28,22 @@ public class FileHelper {
     }
 
     public static ArrayList<String> readData(Context context) {
-        ArrayList<String> itemList = null;
+        ArrayList<String> itemsList = null;
         try {
             FileInputStream fis = context.openFileInput(FILENAME);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            itemList = new ArrayList<>();
+            itemsList = (ArrayList<String>) ois.readObject();
         } catch (FileNotFoundException e) {
+
+            itemsList = new ArrayList<>();
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
 
-        return itemList;
+        return itemsList;
 
     }
 }
